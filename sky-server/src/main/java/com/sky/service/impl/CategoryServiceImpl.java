@@ -14,6 +14,7 @@ import com.sky.mapper.DishMapper;
 import com.sky.mapper.SetmealMapper;
 import com.sky.result.PageResult;
 import com.sky.service.CategoryService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 
+@Slf4j
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
@@ -44,6 +46,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void save(CategoryDTO categoryDTO) {
+        log.info("名称: {} ", categoryDTO.getName());
         Category category = Category.builder()
                 .name(categoryDTO.getName())
                 .sort(categoryDTO.getSort())
@@ -60,7 +63,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void startOrStop(Integer status, Long id) {
-        categoryMapper.update(Category.builder().status(status).id(id).updateUser(BaseContext.getCurrentId()).updateTime(LocalDateTime.now()).build());
+        categoryMapper.update(Category.builder().
+                id(id).
+                status(status).
+                updateUser(BaseContext.getCurrentId()).
+                updateTime(LocalDateTime.now()).
+                build());
     }
 
     @Override

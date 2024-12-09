@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("admin/category")
+@RequestMapping("/admin/category")
 @Api(tags = "分类相关接口")
 @Slf4j
 public class CategoryController {
@@ -34,7 +34,7 @@ public class CategoryController {
 
     @ApiOperation(value = "新增分类")
     @PostMapping
-    public Result save(CategoryDTO categoryDTO) {
+    public Result save(@RequestBody CategoryDTO categoryDTO) {
 
         log.info("新增分类：{}", categoryDTO);
 
